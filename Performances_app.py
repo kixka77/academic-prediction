@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report, accuracy_score, precision_sco
 st.title("Academic Performance Predictor with Feedback")
 
 # Collect user input
-study_hours = st.slider("Study Hours per Week", 0, 100, 25)
+study_hours = st.slider("Study Hours per Day", 0, 24, 12)
 sleep_hours = st.slider("Average Sleep Hours per Day", 0, 12, 6)
 attendance = st.slider("Attendance Percentage", 0, 100, 75)
 assignments = st.slider("Assignment Completion Rate (%)", 0, 100, 80)
@@ -23,16 +23,16 @@ user_input = np.array([[study_hours, sleep_hours, attendance, assignments, activ
 data = []
 labels = []
 for _ in range(300):
-    sh = np.random.randint(0, 100)
+    sh = np.random.randint(0, 24)
     sl = np.random.randint(0, 12)
     att = np.random.randint(0, 100)
     assign = np.random.randint(0, 100)
     act = np.random.choice([0, 1])
     
     score = sh * 0.3 + sl * 0.2 + att * 0.2 + assign * 0.2 + act * 10
-    if score < 50:
+    if score < 40:
         label = "At Risk"
-    elif score < 65:
+    elif score < 60:
         label = "Needs Improvement"
     elif score < 80:
         label = "Satisfactory"
